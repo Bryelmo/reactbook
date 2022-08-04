@@ -1,0 +1,59 @@
+{
+	"name": "reactbook",
+	"version": "1.0.0",
+	"description": "An environment to develop and test components and export it in as external components library",
+	"main": "./dist/index.js",
+	"typings": "dist/index.d.ts",
+	"author": "Gabriele Morero",
+	"license": "ISC",
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@github.com:Bryelmo/reactbook.git"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"storybook": "start-storybook -p 6006",
+		"build-storybook": "build-storybook",
+		"clean:dist": "rimraf dist",
+		"clean:cdn": "rimraf cdn",
+		"prepare": "npm run build",
+		"build": "npm run clean:dist && npm run types && npm run build:babel && npm run build-scss-variables",
+		"types": "npx -p typescript tsc src/index.ts --declaration --jsx react --esModuleInterop --emitDeclarationOnly --outDir dist",
+		"build:babel": "babel src --out-dir dist --extensions '.ts,.tsx,.jsx' --ignore '**/*.cdn.tsx','**/*.stories.tsx' --copy-files --no-copy-ignored",
+		"build-scss-variables": "node build.js",
+		"build:cdn": "npm run clean:cdn && webpack"
+	},
+	"devDependencies": {
+		"@babel/cli": "7.18.9",
+		"@babel/core": "7.18.9",
+		"@babel/preset-env": "7.18.9",
+		"@babel/preset-react": "7.18.6",
+		"@babel/preset-typescript": "7.18.6",
+		"@storybook/addon-actions": "6.5.9",
+		"@storybook/addon-essentials": "6.5.9",
+		"@storybook/addon-interactions": "6.5.9",
+		"@storybook/addon-links": "6.5.9",
+		"@storybook/builder-webpack5": "6.5.9",
+		"@storybook/manager-webpack5": "6.5.9",
+		"@storybook/preset-scss": "1.0.3",
+		"@storybook/react": "6.5.9",
+		"@storybook/testing-library": "0.0.13",
+		"@types/react": "17.0.47",
+		"@types/react-dom": "17.0.17",
+		"babel-loader": "8.2.5",
+		"babel-plugin-inline-react-svg": "2.0.1",
+		"css-loader": "6.7.1",
+		"react": "17.0.2",
+		"react-dom": "17.0.2",
+		"sass": "1.53.0",
+		"sass-loader": "13.0.2",
+		"style-loader": "3.3.1",
+		"ts-loader": "9.3.1",
+		"typescript": "4.7.4",
+		"webpack": "5.73.0",
+		"webpack-cli": "4.10.0"
+	},
+	"dependencies": {
+		"dotenv": "16.0.1"
+	}
+}
